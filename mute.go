@@ -1,6 +1,7 @@
 package mute
 
 import (
+	"fmt"
 	"math/rand"
 	"sync"
 	"time"
@@ -57,6 +58,8 @@ func (m *mute) Serve(b *bot.Bot) {
 			rand := rand.New(seed)
 			muteDuration := rand.Intn(7200)
 			groupMemberInfo.Mute(uint32(muteDuration))
+			replyStr := fmt.Sprintf("恭喜%s获得了%d秒的禁言大礼包", msg.Sender.CardName, muteDuration)
+			c.SendGroupMessage(msg.GroupCode, message.NewSendingMessage().Append(message.NewText(replyStr)))
 		}
 	})
 }
