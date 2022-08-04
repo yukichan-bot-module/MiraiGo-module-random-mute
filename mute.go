@@ -58,7 +58,11 @@ func (m *mute) Serve(b *bot.Bot) {
 			rand := rand.New(seed)
 			muteDuration := rand.Intn(7200)
 			if err := groupMemberInfo.Mute(uint32(muteDuration)); err == nil {
-				replyStr := fmt.Sprintf("恭喜%s获得了%d秒的禁言大礼包", msg.Sender.Nickname, muteDuration)
+				name := msg.Sender.CardName
+				if msg.Sender.CardName == "" {
+					name = msg.Sender.Nickname
+				}
+				replyStr := fmt.Sprintf("恭喜%s获得了%d秒的禁言大礼包", name, muteDuration)
 				c.SendGroupMessage(msg.GroupCode, message.NewSendingMessage().Append(message.NewText(replyStr)))
 			} else {
 				logger.WithError(err).Errorf("Fail to mute %d at group %d", msg.Sender.Uin, msg.GroupCode)
