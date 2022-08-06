@@ -26,7 +26,7 @@ imports (
 // ...
 ```
 
-如果需要自定义关键词，在你的 `application.yaml` 里填入配置（支持个关键词）：
+如果需要自定义关键词，在你的 `application.yaml` 里填入配置（支持多个关键词）：
 
 ```yaml
 aimerneige:
