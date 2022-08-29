@@ -47,7 +47,7 @@ func (m *mute) PostInit() {
 }
 
 func (m *mute) Serve(b *bot.Bot) {
-	b.OnGroupMessage(func(c *client.QQClient, msg *message.GroupMessage) {
+	b.GroupMessageEvent.Subscribe(func(c *client.QQClient, msg *message.GroupMessage) {
 		if isKeyword(msg.ToString()) {
 			groupMemberInfo, err := c.GetMemberInfo(msg.GroupCode, msg.Sender.Uin)
 			if err != nil {
